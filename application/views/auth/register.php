@@ -10,6 +10,12 @@
 	<div class="span7">
 		<h2>{$title}</h2>
 		{form_open(current_url(), $classes_form)}
+			<div class="control-group{if form_error('username')} error{/if}">
+				<label class="control-label" for="type">Username *</label>
+				<div class="controls">
+					<input type="text" name="username" id="value" placeholder="Enter desired username" value="{set_value('username')}">
+				</div>
+			</div>		
 			<div class="control-group{if form_error('email')} error{/if}">
 				<label class="control-label" for="email">E-mail address *</label>
 				<div class="controls">
@@ -32,12 +38,6 @@
 				<label class="control-label" for="type">Confirm password *</label>
 				<div class="controls">
 					<input type="password" name="confirmPassword" id="confirmPassword" placeholder="Re-enter password">
-				</div>
-			</div>
-			<div class="control-group{if form_error('username')} error{/if}">
-				<label class="control-label" for="type">Username *</label>
-				<div class="controls">
-					<input type="text" name="username" id="value" placeholder="Enter desired username" value="{set_value('username')}">
 				</div>
 			</div>				
 <!-- 			<div class="control-group{if form_error('terms')} error{/if}"> -->

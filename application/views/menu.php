@@ -29,8 +29,12 @@
               </li> -->
             </ul>
             <ul class="nav pull-right">
+            	{if $user}
+				<li><a href="{site_url('auth/logout')}">Logout [ {$user->username} ]</a></li>
+				{else}
 				<li><a href="{site_url('auth/login')}">Login</a></li>
 				<li><a href="{site_url('auth/register')}">Register</a></li>
+				{/if}
 			</ul>                 
           </div><!--/.nav-collapse -->
         </div>

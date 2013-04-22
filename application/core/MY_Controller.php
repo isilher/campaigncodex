@@ -24,6 +24,18 @@ class MY_Controller extends CI_Controller {
 			$this->output->enable_profiler(TRUE);
 		}
 		
+		// Set logged in status
+		if($this->ion_auth->logged_in())
+		{
+			// Get the currently logged in user
+			$this->data['user'] = $this->ion_auth->user()->row();
+		}
+		else
+		{
+			// User is not logged in
+			$this->data['user'] = FALSE;
+		}
+		
 		// initialise translation for smarty usage
 //		$this->lang->load('crm');
 //		$this->data['lang'] = (object) $this->lang->language;

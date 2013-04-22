@@ -24,10 +24,51 @@ class Auth extends MY_Controller {
 	
 	function login()
 	{
+		// Load libraries, helpers, etc.
+		$this->load->library('form_validation');
+		$this->load->helper('form');
+		$this->data['classes_form'] = array('class' => '');
+		
+		$this->form_validation->set_rules('username', $this->lang->line('create_user_validation_fname_label'), 'required');
+		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required');		
+		
+		if($this->form_validation->run() == TRUE)
+		{
+			// Valid login form
+			if($this->ion_auth->login(strtolower($this->input->post('username')), $this->input->post('password'), TRUE))
+			{
+				// Login successful
+				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				redirect('', 'refresh');
+			}
+			else
+			{
+				// Login unsuccessful
+				$this->session->set_flashdata('message', $this->ion_auth->errors());
+				//redirect('auth/login', 'refresh');
+			}
+		}
+		else
+		{
+			// Unvalid register form, give feedback
+			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+			$this->data['message_type'] = 'alert-error';
+		}
+		
 		// Title, content, template
 		$this->data['title'] = lang('title_login');
 		$this->data['content'] = 'auth/login.php';
 		$this->load->view('template', $this->data);		
+	}
+	
+	function logout()
+	{
+		//log the user out
+		$logout = $this->ion_auth->logout();
+		
+		//redirect them to the login page
+		$this->session->set_flashdata('message', $this->ion_auth->messages());
+		redirect('auth/login', 'refresh');		
 	}
 	
 	function register()
@@ -37,6 +78,7 @@ class Auth extends MY_Controller {
 		$this->load->helper('form');
 		$this->data['classes_form'] = array('class' => 'form-horizontal');
 		
+		// Set form validation
 		$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_fname_label'), 'required|valid_email|matches[confirmEmail]');
 		$this->form_validation->set_rules('confirmEmail', $this->lang->line('create_user_validation_fname_label'), 'required');
 		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[confirmPassword]');
