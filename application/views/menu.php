@@ -11,9 +11,10 @@
             <ul class="nav">
               <!--<li class="active"><a href="#">Home</a></li> -->
               <li><a href="{site_url('home')}">Home</a></li>
+              <li><a href="{site_url('forum')}">Forum</a></li>
 <!--               <li><a href="{site_url('character')}">Characters</a></li> -->
 <!--               <li><a href="{site_url('campaign')}">Campaigns</a></li> -->
-              <li><a href="{site_url('test')}">Tests</a></li>
+<!--               <li><a href="{site_url('test')}">Tests</a></li> -->
               <!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                 <ul class="dropdown-menu">

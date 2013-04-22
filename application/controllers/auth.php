@@ -24,15 +24,51 @@ class Auth extends MY_Controller {
 	
 	function login()
 	{
-		
+		// Title, content, template
+		$this->data['title'] = lang('title_login');
+		$this->data['content'] = 'auth/login.php';
+		$this->load->view('template', $this->data);		
 	}
 	
 	function register()
 	{
 		// Load libraries, helpers, etc.
+		$this->load->library('form_validation');
 		$this->load->helper('form');
 		$this->data['classes_form'] = array('class' => 'form-horizontal');
 		
+		$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_fname_label'), 'required|valid_email|matches[confirmEmail]');
+		$this->form_validation->set_rules('confirmEmail', $this->lang->line('create_user_validation_fname_label'), 'required');
+		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[confirmPassword]');
+		$this->form_validation->set_rules('confirmPassword', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
+		$this->form_validation->set_rules('username', $this->lang->line('create_user_validation_fname_label'), 'required|xss_clean');
+		
+		if($this->form_validation->run() == TRUE)
+		{
+			// Valid register form, handle registering
+			$username = strtolower($this->input->post('username'));
+			$email = strtolower($this->input->post('email'));
+			$password = $this->input->post('password');
+			//TODO: Check email and username for uniqueness
+			
+			// Create new account
+			if($this->ion_auth->register($username, $password, $email))
+			{
+				// Account successfully created
+				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				redirect('auth/login', 'refresh');
+			}
+			else
+			{
+				// Unvalid register form, give feedback
+				$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+			}
+		}
+		else
+		{
+			// Unvalid register form, give feedback
+			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+		}
 		
 		// Title, content, template
 		$this->data['title'] = lang('title_register');

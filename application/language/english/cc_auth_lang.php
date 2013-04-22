@@ -1,10 +1,12 @@
 <?php
 // Titles
 $lang['title_register']		= 'Register';
-$lang['why_register']		= 'Why register?';
+$lang['title_login']		= 'Login';
 
-// Register form
-//TODO!
+// Login page
+
+// Register page
+$lang['why_register']		= 'Why register?';
 
 // Other
 $lang['register']			= 'Register';
