@@ -5,7 +5,3 @@
 # Old SVN files #
 #################
 *.svn
-
-# Smarty cache directory #
-##########################
-cache/*
