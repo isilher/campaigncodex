@@ -1,3 +1,11 @@
 # Eclipse project files #
 #########################
 *.project
+
+# Old SVN files #
+#################
+*.svn
+
+# Smarty cache directory #
+##########################
+cache/*
