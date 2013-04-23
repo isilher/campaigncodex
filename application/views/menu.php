@@ -30,6 +30,7 @@
             </ul>
             <ul class="nav pull-right">
             	{if $user}
+            	<li><a href="{site_url('profile')}">Profile</a></li>
 				<li><a href="{site_url('auth/logout')}">Logout [ {$user->username} ]</a></li>
 				{else}
 				<li><a href="{site_url('auth/login')}">Login</a></li>
