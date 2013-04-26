@@ -15,9 +15,12 @@ class Profile extends MY_Controller {
 	}
 	
 	function index() {
+		// Load extra libraries, helpers, etc.
+		$this->load->helper('charlink');
+		
 		// Get account with characters
-		$account = new Account();
-		$account->get_by_id($this->data['user']->id);
+ 		$account = new Account();
+ 		$account->get_by_id($this->data['user']->id);
 		
 		$this->data['account'] = $account;
 		

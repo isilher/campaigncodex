@@ -8,7 +8,7 @@
 		<h3>Your characters</h3>
 	</div>
 	<div class="span3">
-		<a class="btn btn-success pull-right topright" href="{site_url('char/new')}"><i class="icon-plus-sign icon-white"></i> New character</a>
+		<a class="btn btn-success pull-right topright" href="{site_url('char/create')}"><i class="icon-plus-sign icon-white"></i> New character</a>
 	</div>
 </div>
 <div class="row">
@@ -25,7 +25,7 @@
 			<tbody>
 			{foreach from=$account->characters item=character}
 				<tr>
-					<td><a href="{site_url('char/index')}/{$character->name}-{$character->unique}">{$character->name}</a></td>
+					<td><a href="{site_url('char/index')}/{charlink($character)}">{$character->name}</a></td>
 					<td>13</td>
 					<td>Human</td>
 					<td>Fighter(4), Ranger(9)</td>

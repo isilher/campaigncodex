@@ -19,7 +19,7 @@
 			<tbody>
 			{foreach from=$characters item=character}
 				<tr>
-					<td><a href="{site_url('char/index')}/{$character->name}-{$character->unique}">{$character->name}</a></td>
+					<td><a href="{site_url('char/index')}/{charlink($character)}">{$character->name}</a></td>
 					<td>13</td>
 					<td>Human</td>
 					<td>Fighter(4), Ranger(9)</td>

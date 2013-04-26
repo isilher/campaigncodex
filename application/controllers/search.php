@@ -15,6 +15,9 @@ class Search extends MY_Controller {
 	}
 	
 	function index() {
+		// Load extra libraries, helpers, etc.
+		$this->load->helper('charlink');
+		
 		// Handle search
 		$post = $this->input->post();
 		//TODO: For now POST, do with GET in future
